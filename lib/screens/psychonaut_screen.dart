@@ -30,6 +30,7 @@ class _PsychonautScreenState extends State<PsychonautScreen> {
     return Scaffold(
           appBar: AppBar(
             title: Text(Constans.camelToSentence(_psychonaut.name)),
+            backgroundColor: Colors.orange,
           ),
           body: Center(
             child: _showLoader 

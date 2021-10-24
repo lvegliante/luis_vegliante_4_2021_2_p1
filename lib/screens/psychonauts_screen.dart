@@ -34,15 +34,16 @@ class _PsychonautsScreenState extends State<PsychonautsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Psychonauts'),
+        backgroundColor: Colors.orange,
         actions: <Widget>[
           _isFiltered
           ? IconButton(
               onPressed: _removeFilter, 
-              icon: Icon(Icons.filter_none)
+              icon: Icon(Icons.filter_7_sharp)
             )
           : IconButton(
               onPressed: _showFilter, 
-              icon: Icon(Icons.filter_alt)
+              icon: Icon(Icons.filter_rounded)
             )
         ],
       ),
