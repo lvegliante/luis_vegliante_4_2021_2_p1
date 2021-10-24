@@ -7,6 +7,7 @@ import 'package:flutter_nautas_app/Models/psychonauts.dart';
 import 'package:flutter_nautas_app/components/loader_component.dart';
 import 'package:flutter_nautas_app/helpers/api_helper.dart';
 import 'package:flutter_nautas_app/models/response.dart';
+import 'package:flutter_nautas_app/screens/psychonaut_screen.dart';
 
 class PsychonautsScreen extends StatefulWidget {
 
@@ -264,9 +265,17 @@ class _PsychonautsScreenState extends State<PsychonautsScreen> {
   // Join/Merge all words back to one String
   return capitalizedWords.join(' ');
 }
+void _goPsyPower(Psychonaut psychonaut) async {
+    String? result = await Navigator.push(
+      context, 
+      MaterialPageRoute(
+        builder: (context) => PsychonautScreen(
+          psychonaut: psychonaut,
+        )
+      )
+    );
+    if (result == 'yes') {
+      _getPsychonauts();
+    }
   }
-
- 
-  
-  
-  
+  }
