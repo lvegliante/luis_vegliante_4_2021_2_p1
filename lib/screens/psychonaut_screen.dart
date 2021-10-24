@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_nautas_app/Models/psychonauts.dart';
 import 'package:flutter_nautas_app/components/loader_component.dart';
+import 'package:flutter_nautas_app/helpers/constans.dart';
 
 
 class PsychonautScreen extends StatefulWidget {
@@ -28,7 +29,7 @@ class _PsychonautScreenState extends State<PsychonautScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
           appBar: AppBar(
-            title: Text(_psychonaut.name),
+            title: Text(Constans.camelToSentence(_psychonaut.name)),
           ),
           body: Center(
             child: _showLoader 
@@ -58,6 +59,10 @@ class _PsychonautScreenState extends State<PsychonautScreen> {
               child: Container(
                 margin: EdgeInsets.all(10),
                 padding: EdgeInsets.all(5),
+                decoration: new BoxDecoration(
+                color: Colors.blue.shade200,
+                borderRadius: BorderRadius.circular(10),
+              ),
                 child: Row(
                   children: <Widget>[
                     ClipRRect(
@@ -78,20 +83,28 @@ class _PsychonautScreenState extends State<PsychonautScreen> {
                             Column(
                               children: <Widget>[
                                 Text(
-                                  e.name,
+                                  Constans.camelToSentence(e.name),
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold
                                   ),
                                 ),
                                 Row(
+                                  
                                   children: [
-                                    Text(
-                                      e.description,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                      ),
-                                    ),
+                                    Container(
+                                          height: 80,
+                                          width: 280,       
+                                          decoration:
+                                              BoxDecoration(border: Border.all(color: Colors.blueAccent)),
+                                          child: FittedBox(
+                                            child: Text(
+                                            e.description, textAlign:  TextAlign.center,
+                                            style: TextStyle(color: Colors.black),
+                      
+                                          ),
+                                        ),
+                                        )
                                   ],
                                 ),
                               ],
@@ -99,6 +112,7 @@ class _PsychonautScreenState extends State<PsychonautScreen> {
                           ],
                         ),
                       )
+                      
                     ),
                   ],
                 ),
@@ -130,41 +144,27 @@ Widget _showPsypowers() {
     return Container(
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(5),
+      decoration: new BoxDecoration(
+    color: Colors.green.shade200,
+    borderRadius: BorderRadius.circular(10),
+  ),
       child: Row(
         children: <Widget>[
           Stack(
             children: <Widget>[
               ClipRRect(
-                borderRadius: BorderRadius.circular(50),
+                borderRadius: BorderRadius.circular(80),
                 child: ClipRRect(
-                      borderRadius: BorderRadius.circular(40),
+                      borderRadius: BorderRadius.circular(75),
                       child: Image.network(
                         _psychonaut.img,
                         fit: BoxFit.cover,
-                        height: 80,
-                        width: 80,
+                        height: 150,
+                        width: 150,
                       ),
                     ),
               ),
-              Positioned(
-                bottom: 0,
-                left: 60,
-                child: InkWell(
-                    child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
-                    child: Container(
-                      color: Colors.green[50],
-                      height: 40,
-                      width: 40,
-                      child: Icon(
-                        Icons.edit,
-                        size: 30,
-                        color: Colors.blue,
-                      ),
-                    ),
-                  ),
-                )
-              )
+              
             ],
           ),
           Expanded(
@@ -182,37 +182,48 @@ Widget _showPsypowers() {
                             Text(
                               'Nombre: ', 
                               style: TextStyle(
-                                fontWeight: FontWeight.bold
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
                               )
                             ),
                             Text(
-                              _psychonaut.name, 
+                              Constans.camelToSentence(_psychonaut.name), 
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 18,
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 5,),
+                        SizedBox(height: 18,),
                         Row(
                           children: <Widget>[
                             Text(
                               'Genero: ', 
                               style: TextStyle(
-                                fontWeight: FontWeight.bold
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18
                               )
                             ),
                             Text(
                               (_psychonaut.gender == 'male') ? 'Hombre':'Mujer',
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 18,
                               ),
                             ),
                           ],
                         ),
-
-                        SizedBox(height: 5,),
-                         Container()
+                        SizedBox(height: 18,),
+                        Row(
+                          children: <Widget>[
+                            Text(
+                              'PsyPowers... ', 
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18
+                              )
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),

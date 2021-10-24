@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_nautas_app/Models/psychonauts.dart';
 import 'package:flutter_nautas_app/components/loader_component.dart';
 import 'package:flutter_nautas_app/helpers/api_helper.dart';
+import 'package:flutter_nautas_app/helpers/constans.dart';
 import 'package:flutter_nautas_app/models/response.dart';
 import 'package:flutter_nautas_app/screens/psychonaut_screen.dart';
 
@@ -125,10 +126,14 @@ class _PsychonautsScreenState extends State<PsychonautsScreen> {
         children: _psychonauts.map((e) {
           return Card(
             child: InkWell(
-
+              onTap: () => _goPsyPower(e),
               child: Container(
                 margin: EdgeInsets.all(10),
                 padding: EdgeInsets.all(5),
+                 decoration: new BoxDecoration(
+                color: Colors.green.shade200,
+                borderRadius: BorderRadius.circular(10),
+              ),
                 child: Row(
                   children: [
                     ClipRRect(
@@ -149,7 +154,7 @@ class _PsychonautsScreenState extends State<PsychonautsScreen> {
                             Column(
                               children: [
                                 Text(
-                                  camelToSentence(e.name), 
+                                  Constans.camelToSentence(e.name), 
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold
@@ -161,7 +166,7 @@ class _PsychonautsScreenState extends State<PsychonautsScreen> {
                         ),
                       ),
                     ),
-                    Icon(Icons.arrow_forward_ios),
+                    Icon(Icons.settings_power),
                   ],
                 ),
               ),
@@ -241,41 +246,18 @@ class _PsychonautsScreenState extends State<PsychonautsScreen> {
 
     
   }
-  String camelToSentence(String text)  {
  
-
-  if (text.length <= 1) {
-    return text.toUpperCase();
-  }
-
-  // Split string into multiple words
-  final List<String> words = text.split(' ');
-
-  // Capitalize first letter of each words
-  final capitalizedWords = words.map((word) {
-    if (word.trim().isNotEmpty) {
-      final String firstLetter = word.trim().substring(0, 1).toUpperCase();
-      final String remainingLetters = word.trim().substring(1);
-
-      return '$firstLetter$remainingLetters';
-    }
-    return '';
-  });
-
-  // Join/Merge all words back to one String
-  return capitalizedWords.join(' ');
-}
-void _goPsyPower(Psychonaut psychonaut) async {
-    String? result = await Navigator.push(
-      context, 
-      MaterialPageRoute(
-        builder: (context) => PsychonautScreen(
-          psychonaut: psychonaut,
+  void _goPsyPower(Psychonaut psychonaut) async {
+      String? result = await Navigator.push(
+        context, 
+        MaterialPageRoute(
+          builder: (context) => PsychonautScreen(
+            psychonaut: psychonaut,
+          )
         )
-      )
-    );
-    if (result == 'yes') {
-      _getPsychonauts();
+      );
+      if (result == 'yes') {
+        _getPsychonauts();
+      }
     }
-  }
   }
