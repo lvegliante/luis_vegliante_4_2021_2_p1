@@ -93,18 +93,17 @@ class _PsychonautScreenState extends State<PsychonautScreen> {
                                   
                                   children: [
                                     Container(
-                                          height: 80,
-                                          width: 280,       
-                                          decoration:
-                                              BoxDecoration(border: Border.all(color: Colors.blueAccent)),
-                                          child: FittedBox(
-                                            child: Text(
-                                            e.description, textAlign:  TextAlign.center,
-                                            style: TextStyle(color: Colors.black),
-                      
-                                          ),
-                                        ),
-                                        )
+                                      constraints: BoxConstraints(maxWidth: 200),
+                                        child: Text((e.description == null) ? " ": e.description,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.black87,
+                                              fontSize: 17.0
+                                    ),
+                                    )
+                                    
+                                    ),
+					 
                                   ],
                                 ),
                               ],
